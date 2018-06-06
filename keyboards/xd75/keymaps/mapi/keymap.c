@@ -19,6 +19,15 @@
 #define _QW 0
 #define _FN 1
 
+// for JIS Keyboard
+#define JIS_HAT  KC_EQL   // ^ and ~
+#define JIS_JYEN KC_JYEN  // \ and |
+#define JIS_AT   KC_LBRC  // @ and `
+#define JIS_LBRC KC_RBRC  // [ and {
+#define JIS_CLON KC_QUOT  // : and *
+#define JIS_RBRC KC_BSLS  // ] and }
+#define JIS_BSLS KC_RO    // \ and _
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* QWERTY
@@ -36,11 +45,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
  [_QW] = { /* QWERTY */
-  { KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_MINS, KC_GRV,  KC_EQL,  KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC  },
-  { KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_LBRC, KC_BSLS, KC_RBRC, KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_QUOT  },
-  { KC_CAPS, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_HOME, KC_DEL,  KC_PGUP, KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_ENT   },
-  { KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_END,  KC_UP,   KC_PGDN, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT  },
-  { KC_LCTL, KC_LGUI, KC_LALT, MO(_FN), KC_SPC,  KC_SPC,  KC_LEFT, KC_DOWN, KC_RGHT, KC_SPC,  KC_SPC,  MO(_FN), KC_RALT, KC_RGUI, KC_RCTL  },
+  { KC_ZKHK,  KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,  JIS_HAT,  JIS_JYEN, KC_BSPC  },
+  { KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     JIS_AT,   JIS_LBRC, _______,  _______  },
+  { KC_LCTL,  KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  JIS_CLON, JIS_RBRC, KC_ENT,   _______  },
+  { KC_LSFT,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,  JIS_BSLS, _______,  _______,  _______  },
+  { KC_LCTL,  _______,  KC_LWIN,  KC_LALT,  KC_MHEN,  KC_SPC,   _______,  KC_HENK,  KC_KANA,  KC_RALT,  KC_APP,   KC_RCTL,  _______,  _______,  _______  },
  },
 
 /* FUNCTION
