@@ -41,7 +41,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
  * | LSHIFT  | Z       | X       | C       | V       | B       | N       | M       | , / <   | . / >   | / / ?   | \ / _   | RSHIFT  |         |         |
  * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
- * | LCTRL   |         | LWIN    | LALT    | MUHENKAN| SPACE   | SPACE   | HENKAN  | KANA    | RALT    | APP     | RCTRL   |         |         | FN(LED) |
+ * | LCTRL   |         | LWIN    | LALT    | MUHENKAN| SPACE   | MO(_FN) | HENKAN  | KANA    | RALT    | APP     | RCTRL   |         |         | FN(LED) |
  * '-----------------------------------------------------------------------------------------------------------------------------------------------------'
  */
 
@@ -50,29 +50,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   { KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     JIS_AT,   JIS_LBRC, XXXXXXX,  XXXXXXX  },
   { KC_LCTL,  KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  JIS_CLON, JIS_RBRC, KC_ENT,   XXXXXXX  },
   { KC_LSFT,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,  JIS_BSLS, KC_RSFT,  XXXXXXX,  XXXXXXX  },
-  { KC_LCTL,  XXXXXXX,  KC_LWIN,  KC_LALT,  KC_MHEN,  KC_SPC,   XXXXXXX,  KC_HENK,  KC_KANA,  KC_RALT,  KC_APP,   KC_RCTL,  XXXXXXX,  XXXXXXX,  MO(_LED) },
+  { KC_LCTL,  XXXXXXX,  KC_LWIN,  KC_LALT,  KC_MHEN,  KC_SPC,   MO(_FN),  KC_HENK,  KC_KANA,  KC_RALT,  KC_APP,   KC_RCTL,  XXXXXXX,  XXXXXXX,  MO(_LED) },
  },
 
+
 /* FUNCTION
- * .--------------------------------------------------------------------------------------------------------------------------------------.
- * | F1     | F2     | F3     | F4     | F5     | F6     | NUM LK | P/     | P*     | F7     | F8     | F9     | F10    | F11    | F12    |
- * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------|
- * | SELECT | CALC   | MYCOMP | MAIL   | RGB HD | RGB HI | P7     | P8     | P9     | -      |        |        | PR SCR | SCR LK | PAUSE  |
- * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------|
- * | PREV   | PLAY   | NEXT   | STOP   | RGB SD | RGB SI | P4     | P5     | P6     | +      |        | RESET  |        |        |        |
- * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------|
- * | VOL-   | MUTE   | VOL+   | APP    | RGB VD | RGB VI | P1     | P2     | P3     | PENT   |        |        |        |        |        |
- * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------|
- * |        |        | RGB TG | FN     | RGB RMD| RGB MD | P0     |        | P.     | PENT   | PENT   | FN     |        |        |        |
- * '--------------------------------------------------------------------------------------------------------------------------------------'
+ * .-----------------------------------------------------------------------------------------------------------------------------------------------------.
+ * |         | F1      | F2      | F3      | F4      | F5      | F6      | F7      | F8      | F9      | F10     | F11     | F12     |         |         |
+ * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
+ * |         | F13     | F14     | F15     | F16     | F17     | F18     | F19     | F20     | F21     | F22     | F23     | F24     |         |         |
+ * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
+ * |         |         |         |         |         |         |         |         |         |         |         |         |         |         |         |
+ * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
+ * |         |         |         |         |         |         |         |         |         |         |         |         |         |         |         |
+ * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
+ * |         |         |         |         |         |         | MO(_FN) |         |         |         |         |         |         |         |         |
+ * '-----------------------------------------------------------------------------------------------------------------------------------------------------'
  */
 
  [_FN] = { /* FUNCTION */
-  { XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX  },
-  { XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX  },
-  { XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX  },
-  { XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX  },
-  { XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX  },
+  { XXXXXXX,  KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   XXXXXXX, XXXXXXX  },
+  { XXXXXXX,  KC_F13,   KC_F14,   KC_F15,   KC_F16,   KC_F17,   KC_F18,   KC_F19,   KC_F20,   KC_F21,   KC_F22,   KC_F23,   KC_F24,   XXXXXXX, XXXXXXX  },
+  { _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX  },
+  { _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  _______,  XXXXXXX, XXXXXXX  },
+  { _______,  XXXXXXX,  _______,  _______,  XXXXXXX,  XXXXXXX,  _______,  XXXXXXX,  XXXXXXX,  _______,  XXXXXXX,  _______,  XXXXXXX,  XXXXXXX, XXXXXXX  },
  },
 
 /* LED
