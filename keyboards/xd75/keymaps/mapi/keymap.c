@@ -18,8 +18,8 @@
 
 // Layer shorthand
 #define QWERTY_LAYER 0
-#define _FN 1
-#define _LED 2
+#define FUNCTION_LAYER 1
+#define LED_LAYER 2
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -41,52 +41,52 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     { KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     XXXXXXX,  XXXXXXX,  KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     JP_AT,    JP_LBRC },
     { KC_LCTL,  KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     XXXXXXX,  KC_ESC,   KC_H,     KC_J,     KC_K,     KC_L,     JP_SCLN,  JP_COLN,  JP_RBRC },
     { KC_LSFT,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     XXXXXXX,  XXXXXXX,  KC_N,     KC_M,     JP_COMM,  JP_DOT,   JP_SLSH,  JP_BSLS,  KC_RSFT },
-    { KC_LCTL,  XXXXXXX,  KC_LWIN,  KC_LALT,  KC_BSPC,  KC_SPC,   JP_MHEN,  JP_HENK,  KC_ENT,   XXXXXXX,  XXXXXXX,  KC_RALT,  KC_APP,   KC_RCTL,  MO(_LED)},
+    { KC_LCTL,  XXXXXXX,  KC_LWIN,  KC_LALT,  KC_BSPC,  KC_SPC,   JP_MHEN,  JP_HENK,  KC_ENT,   XXXXXXX,  XXXXXXX,  KC_RALT,  KC_APP,   KC_RCTL,  MO(2)   },
   },
 
-/* FUNCTION
- * .-----------------------------------------------------------------------------------------------------------------------------------------------------.
- * |         | F1      | F2      | F3      | F4      | F5      | F6      | F7      | F8      | F9      | F10     | F11     | F12     |         |         |
- * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
- * |         | F13     | F14     | F15     | F16     | F17     | F18     | F19     | F20     | F21     | F22     | F23     | F24     |         |         |
- * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
- * |         |         |         |         |         |         |         |         |         |         |         |         |         |         |         |
- * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
- * |         |         |         |         |         |         |         |         |         |         |         |         |         |         |         |
- * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
- * |         |         |         |         |         |         | MO(_FN) |         |         |         |         |         |         |         |         |
- * '-----------------------------------------------------------------------------------------------------------------------------------------------------'
+/* FUNCTION LAYER
+ *  .-----------------------------------------------------------------------------------------------------------------------------------------------------.
+ *  |         | F1      | F2      | F3      | F4      | F5      | F6      | F7      | F8      | F9      | F10     | F11     | F12     |         |         |
+ *  |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
+ *  |         | F13     | F14     | F15     | F16     | F17     | F18     | F19     | F20     | F21     | F22     | F23     | F24     |         |         |
+ *  |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
+ *  |         |         |         |         |         |         |         |         |         |         |         |         |         |         |         |
+ *  |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
+ *  |         |         |         |         |         |         |         |         |         |         |         |         |         |         |         |
+ *  |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
+ *  |         |         |         |         |         |         | MO(_FN) |         |         |         |         |         |         |         |         |
+ *  '-----------------------------------------------------------------------------------------------------------------------------------------------------'
  */
 
- [_FN] = { /* FUNCTION */
-  { XXXXXXX,  KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   XXXXXXX, XXXXXXX  },
-  { XXXXXXX,  KC_F13,   KC_F14,   KC_F15,   KC_F16,   KC_F17,   KC_F18,   KC_F19,   KC_F20,   KC_F21,   KC_F22,   KC_F23,   KC_F24,   XXXXXXX, XXXXXXX  },
-  { _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX  },
-  { _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  _______,  XXXXXXX, XXXXXXX  },
-  { _______,  XXXXXXX,  _______,  _______,  XXXXXXX,  XXXXXXX,  _______,  XXXXXXX,  XXXXXXX,  _______,  XXXXXXX,  _______,  XXXXXXX,  XXXXXXX, XXXXXXX  },
- },
+  [FUNCTION_LAYER] = {
+    { XXXXXXX,  KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   XXXXXXX,  XXXXXXX },
+    { XXXXXXX,  KC_F13,   KC_F14,   KC_F15,   KC_F16,   KC_F17,   KC_F18,   KC_F19,   KC_F20,   KC_F21,   KC_F22,   KC_F23,   KC_F24,   XXXXXXX,  XXXXXXX },
+    { _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX },
+    { _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  _______,  XXXXXXX,  XXXXXXX },
+    { _______,  XXXXXXX,  _______,  _______,  XXXXXXX,  XXXXXXX,  _______,  XXXXXXX,  XXXXXXX,  _______,  XXXXXXX,  _______,  XXXXXXX,  XXXXXXX,  XXXXXXX },
+  },
 
 /* LED
- * .-----------------------------------------------------------------------------------------------------------------------------------------------------.
- * |         | BL_ON   | BL_OFF  |         |         |         |         |         |         |         |         |         |         |         |         |
- * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
- * |         | BL_INC  | BL_DEC  |         |         |         |         |         |         |         |         |         |         |         |         |
- * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
- * |         |         |         |         |         |         |         |         |         |         |         |         |         |         |         |
- * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
- * |         |         |         |         |         |         |         |         |         |         |         |         |         |         |         |
- * |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
- * |         |         |         |         |         |         |         |         |         |         |         |         |         |         | FN(LED) |
- * '-----------------------------------------------------------------------------------------------------------------------------------------------------'
+ *  .-----------------------------------------------------------------------------------------------------------------------------------------------------.
+ *  |         | BL_ON   | BL_OFF  |         |         |         |         |         |         |         |         |         |         |         |         |
+ *  |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
+ *  |         | BL_INC  | BL_DEC  |         |         |         |         |         |         |         |         |         |         |         |         |
+ *  |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
+ *  |         |         |         |         |         |         |         |         |         |         |         |         |         |         |         |
+ *  |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
+ *  |         |         |         |         |         |         |         |         |         |         |         |         |         |         |         |
+ *  |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
+ *  |         |         |         |         |         |         |         |         |         |         |         |         |         |         | FN(LED) |
+ *  '-----------------------------------------------------------------------------------------------------------------------------------------------------'
  */
 
- [_LED] = { /* LED */
-  { XXXXXXX,  BL_ON,    BL_OFF,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX  },
-  { XXXXXXX,  BL_INC,   BL_DEC,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX  },
-  { XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX  },
-  { XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX  },
-  { XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, _______  },
- }
+  [LED_LAYER] = {
+    { XXXXXXX,  BL_ON,    BL_OFF,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX },
+    { XXXXXXX,  BL_INC,   BL_DEC,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX },
+    { XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX },
+    { XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX },
+    { XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  _______ },
+  }
 };
 
 const uint16_t PROGMEM fn_actions[] = {
