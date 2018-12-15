@@ -23,6 +23,7 @@
 #define LED_LAYER 3
 
 // Key combination shorthand
+// Task Switching
 #define ATAB LALT(KC_TAB)
 #define ASTAB LCA(KC_TAB)
 #define ALTF4 LALT(KC_F4)
@@ -64,7 +65,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *  |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
  *  | PASS    |         | AltTab- |         | AltTab  |         | FTAB    |         |         | LEFT    | DOWN    | RIGHT   |         |         |         |
  *  |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
- *  | PASS    |         |         |         |         |         | BTAB    |         |         |         |         |         |         |         | PASS    |
+ *  | PASS    |         |         |         |         |         | BTAB    |         |         | KC_WBAK | KC_WFWD |         |         |         | PASS    |
  *  |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
  *  | PASS    |         | PASS    | PASS    | DEL     |         |         |         |         | PASS    |         | PASS    |         | PASS    |         |
  *  '-----------------------------------------------------------------------------------------------------------------------------------------------------'
@@ -73,7 +74,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     { XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX },
     { XXXXXXX,  ALTF4,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  CTAB,     ROTAB,    XXXXXXX,  KC_HOME,  KC_UP,    KC_END,   XXXXXXX,  XXXXXXX,  XXXXXXX },
     { _______,  XXXXXXX,  ASTAB,    XXXXXXX,  ATAB,     XXXXXXX,  FTAB,     XXXXXXX,  XXXXXXX,  KC_LEFT,  KC_DOWN,  KC_RIGHT, XXXXXXX,  XXXXXXX,  XXXXXXX },
-    { _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  BTAB,     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  _______ },
+    { _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  BTAB,     XXXXXXX,  XXXXXXX,  KC_WBAK,  KC_WFWD,  XXXXXXX,  XXXXXXX,  XXXXXXX,  _______ },
     { _______,  XXXXXXX,  _______,  _______,  KC_DEL,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  _______,  XXXXXXX,  _______,  XXXXXXX,  _______,  XXXXXXX },
   },
 
