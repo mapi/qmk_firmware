@@ -18,8 +18,20 @@
 
 // Layer shorthand
 #define QWERTY_LAYER 0
-#define FUNCTION_LAYER 1
-#define LED_LAYER 2
+#define MODKEY_LAYER 1
+#define FUNCTION_LAYER 2
+#define LED_LAYER 3
+
+// Key combination shorthand
+#define ATAB LALT(KC_TAB)
+#define ASTAB LCA(KC_TAB)
+#define ALTF4 LALT(KC_F4)
+// for Chrome Browser
+#define FTAB LCTL(KC_PGUP) // Forward Tab
+#define BTAB LCTL(KC_PGDN) // Back Tab
+#define CTAB LCTL(KC_F4) // Close Tab
+#define ROTAB LCTL(LSFT(KC_T))  // Reopen Close Tab
+
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -33,7 +45,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *  |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
  *  | LSHIFT  | Z       | X       | C       | V       | B       | PgDn    |         | N       | M       | , / <   | . / >   | / / ?   | \ / _   | RSHIFT  |
  *  |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
- *  | LCTRL   |         | LWIN    | LALT    | BS      | SPACE   | MHEN    | HENK    | ENTER   | MO      |         | RALT    | APP     | RCTRL   | FN(LED) |
+ *  | LCTRL   |         | LWIN    | LALT    | BS      | SPACE   | MHEN    | HENK    | ENTER   | MO(1)   |         | RALT    | APP     | RCTRL   | FN(LED) |
  *  '-----------------------------------------------------------------------------------------------------------------------------------------------------'
  */
   [QWERTY_LAYER] = {
@@ -41,7 +53,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     { KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     XXXXXXX,  KC_PSCR,  KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     JP_AT,    JP_LBRC },
     { KC_LCTL,  KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_PGUP,  KC_ESC,   KC_H,     KC_J,     KC_K,     KC_L,     JP_SCLN,  JP_COLN,  JP_RBRC },
     { KC_LSFT,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_PGDN,  XXXXXXX,  KC_N,     KC_M,     JP_COMM,  JP_DOT,   JP_SLSH,  JP_BSLS,  KC_RSFT },
-    { KC_LCTL,  XXXXXXX,  KC_LWIN,  KC_LALT,  KC_BSPC,  KC_SPC,   JP_MHEN,  JP_HENK,  KC_ENT,   XXXXXXX,  XXXXXXX,  KC_RALT,  KC_APP,   KC_RCTL,  MO(2)   },
+    { KC_LCTL,  XXXXXXX,  KC_LWIN,  KC_LALT,  KC_BSPC,  KC_SPC,   JP_MHEN,  JP_HENK,  KC_ENT,   MO(1),    XXXXXXX,  KC_RALT,  KC_APP,   KC_RCTL,  MO(2)   },
+  },
+
+/* MODKEY LAYER
+ *  .-----------------------------------------------------------------------------------------------------------------------------------------------------.
+ *  |         |         |         |         |         |         |         |         |         |         |         |         |         |         |         |
+ *  |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
+ *  |         | AltF4   |         |         |         |         | CTAB    | ROTAB   |         | HOME    | UP      | END     |         |         |         |
+ *  |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
+ *  | PASS    |         | AltTab- |         | AltTab  |         | FTAB    |         |         | LEFT    | DOWN    | RIGHT   |         |         |         |
+ *  |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
+ *  | PASS    |         |         |         |         |         | BTAB    |         |         |         |         |         |         |         | PASS    |
+ *  |---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------+---------|
+ *  | PASS    |         | PASS    | PASS    | DEL     |         |         |         |         | PASS    |         | PASS    |         | PASS    |         |
+ *  '-----------------------------------------------------------------------------------------------------------------------------------------------------'
+ */
+  [MODKEY_LAYER] = {
+    { XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX },
+    { XXXXXXX,  ALTF4,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  CTAB,     ROTAB,    XXXXXXX,  KC_HOME,  KC_UP,    KC_END,   XXXXXXX,  XXXXXXX,  XXXXXXX },
+    { _______,  XXXXXXX,  ASTAB,    XXXXXXX,  ATAB,     XXXXXXX,  FTAB,     XXXXXXX,  XXXXXXX,  KC_LEFT,  KC_DOWN,  KC_RIGHT, XXXXXXX,  XXXXXXX,  XXXXXXX },
+    { _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  BTAB,     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  _______ },
+    { _______,  XXXXXXX,  _______,  _______,  KC_DEL,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  _______,  XXXXXXX,  _______,  XXXXXXX,  _______,  XXXXXXX },
   },
 
 /* FUNCTION LAYER
