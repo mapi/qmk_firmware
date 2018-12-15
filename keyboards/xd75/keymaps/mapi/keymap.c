@@ -17,10 +17,12 @@
 #include "xd75.h"
 
 // Layer shorthand
-#define QWERTY_LAYER 0
-#define MODKEY_LAYER 1
-#define FUNCTION_LAYER 2
-#define LED_LAYER 3
+enum layers {
+  _QWERTY = 0,
+  _MODKEY,
+  _FUNCKEY,
+  _LED,
+};
 
 // Key combination shorthand
 // Task Switching
@@ -49,7 +51,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *  | LCTRL   |         | LWIN    | LALT    | BS      | SPACE   | MHEN    | HENK    | ENTER   | MO(1)   |         | RALT    | APP     | RCTRL   | FN(LED) |
  *  '-----------------------------------------------------------------------------------------------------------------------------------------------------'
  */
-  [QWERTY_LAYER] = {
+  [_QWERTY] = {
     { JP_ZHTG,  KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     XXXXXXX,  JP_YEN,   KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     JP_MINS,  JP_CIRC },
     { KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     XXXXXXX,  KC_PSCR,  KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     JP_AT,    JP_LBRC },
     { KC_LCTL,  KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_PGUP,  KC_ESC,   KC_H,     KC_J,     KC_K,     KC_L,     JP_SCLN,  JP_COLN,  JP_RBRC },
@@ -70,7 +72,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *  | PASS    |         | PASS    | PASS    | DEL     |         |         |         |         | PASS    |         | PASS    |         | PASS    |         |
  *  '-----------------------------------------------------------------------------------------------------------------------------------------------------'
  */
-  [MODKEY_LAYER] = {
+  [_MODKEY] = {
     { XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX },
     { XXXXXXX,  ALTF4,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  CTAB,     ROTAB,    XXXXXXX,  KC_HOME,  KC_UP,    KC_END,   XXXXXXX,  XXXXXXX,  XXXXXXX },
     { _______,  XXXXXXX,  ASTAB,    XXXXXXX,  ATAB,     XXXXXXX,  FTAB,     XXXXXXX,  XXXXXXX,  KC_LEFT,  KC_DOWN,  KC_RIGHT, XXXXXXX,  XXXXXXX,  XXXXXXX },
@@ -92,7 +94,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *  '-----------------------------------------------------------------------------------------------------------------------------------------------------'
  */
 
-  [FUNCTION_LAYER] = {
+  [_FUNCKEY] = {
     { XXXXXXX,  KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   XXXXXXX,  XXXXXXX },
     { XXXXXXX,  KC_F13,   KC_F14,   KC_F15,   KC_F16,   KC_F17,   KC_F18,   KC_F19,   KC_F20,   KC_F21,   KC_F22,   KC_F23,   KC_F24,   XXXXXXX,  XXXXXXX },
     { _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX },
@@ -114,7 +116,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *  '-----------------------------------------------------------------------------------------------------------------------------------------------------'
  */
 
-  [LED_LAYER] = {
+  [_LED] = {
     { XXXXXXX,  BL_ON,    BL_OFF,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX },
     { XXXXXXX,  BL_INC,   BL_DEC,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX },
     { XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX },
