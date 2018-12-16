@@ -16,6 +16,9 @@
 #include "keymap_jp.h"
 #include "xd75.h"
 
+static bool led_blink = false;
+static uint16_t led_blink_timer = 0;
+
 // Layer shorthand
 enum layers {
   _QWERTY = 0,
@@ -67,11 +70,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case FUNC_ON:
       if (record->event.pressed) {
         layer_on(_FUNCKEY);
-        backlight_level(0);
+        led_blink = true;
       }
       break;
     case FUNC_OFF:
       if (record->event.pressed) {
+        led_blink = false;
         clear_mods();
         backlight_level(6);
         layer_off(_FUNCKEY);
@@ -80,6 +84,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
   return true;
 };
+
+void matrix_scan_user(void) {
+  // blink backlight LED while function layer enabled.
+  if (led_blink) {
+    if (timer_elapsed(led_blink_timer) > 300) {
+      if (get_backlight_level() == 0) {
+        backlight_level(6);
+      } else {
+        backlight_level(0);
+      }
+      led_blink_timer = timer_read();
+    }
+  }
+}
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
