@@ -70,9 +70,11 @@ uint8_t mod_state;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     mod_state = get_mods();
     // A_TAB, A_S_TAB を連打した時用
+    static bool atab_registered;
     if (keycode == A_TAB) {
         if (record->event.pressed) {
             register_code(KC_LALT);
+            atab_registered = true;
             register_code(KC_TAB);
         } else {
             unregister_code(KC_TAB);
@@ -81,15 +83,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     } else if (keycode == A_S_TAB) {
         if (record->event.pressed) {
             register_code(KC_LALT);
-            register_code(KC_LSFT);
-            register_code(KC_TAB);
+            atab_registered = true;
+            register_code16(LSFT(KC_TAB));
         } else {
-            unregister_code(KC_TAB);
-            unregister_code(KC_LSFT);
+            unregister_code16(LSFT(KC_TAB));
         }
         return false;
     } else {
-        unregister_code(KC_LALT);
+        if (atab_registered) {
+            unregister_code(KC_LALT);
+            atab_registered = false;
+        }
     }
 
     switch (keycode) {
