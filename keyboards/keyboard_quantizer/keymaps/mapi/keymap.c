@@ -57,49 +57,49 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_MOD1] = LAYOUT(
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-    XXXXXXX, LALT(KC_F4), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_HOME, KC_UP,   KC_END,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-    _______, XXXXXXX, A_S_TAB, XXXXXXX, A_TAB,   XXXXXXX, XXXXXXX, KC_LEFT, KC_DOWN, KC_RIGHT, MY_SCLN, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    XXXXXXX, LALT(KC_F4), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_HOME, KC_UP, KC_END, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    _______, XXXXXXX, A_S_TAB, XXXXXXX, A_TAB, XXXXXXX, XXXXXXX, KC_LEFT, KC_DOWN, KC_RIGHT, MY_SCLN, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-    _______, XXXXXXX, _______, KC_DEL,  XXXXXXX, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+    _______, XXXXXXX, _______, KC_DEL, XXXXXXX, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
     )
 };
 // clang-format on
 
-
-uint8_t mod_state;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    mod_state = get_mods();
-    // A_TAB, A_S_TAB を連打した時用
     static bool atab_registered;
-    if (keycode == A_TAB) {
-        if (record->event.pressed) {
-            register_code(KC_LALT);
-            atab_registered = true;
-            register_code(KC_TAB);
-        } else {
-            unregister_code(KC_TAB);
-        }
-        return false;
-    } else if (keycode == A_S_TAB) {
-        if (record->event.pressed) {
-            register_code(KC_LALT);
-            atab_registered = true;
-            register_code16(LSFT(KC_TAB));
-        } else {
-            unregister_code16(LSFT(KC_TAB));
-        }
-        return false;
-    } else {
-        if (atab_registered) {
-            unregister_code(KC_LALT);
-            atab_registered = false;
-        }
+    // A_TAB, A_S_TAB を連打した時用
+    switch (keycode) {
+        case A_TAB:
+            if (record->event.pressed) {
+                register_code(KC_LALT);
+                atab_registered = true;
+                register_code(KC_TAB);
+            } else {
+                unregister_code(KC_TAB);
+            }
+            return false;
+        case A_S_TAB:
+            if (record->event.pressed) {
+                register_code(KC_LALT);
+                atab_registered = true;
+                register_code16(LSFT(KC_TAB));
+            } else {
+                unregister_code16(LSFT(KC_TAB));
+            }
+            return false;
+        default:
+            if (atab_registered) {
+                unregister_code(KC_LALT);
+                atab_registered = false;
+            }
+            break;
     }
 
+    static bool my_coln_registered;
+    static bool my_scln_registered;
+    uint8_t mod_state = get_mods();
     switch (keycode) {
         case MY_COLN:
-            {
-            static bool my_coln_registered;
             if (record->event.pressed) {
                 if (mod_state & MOD_MASK_SHIFT) {
                     del_mods(MOD_MASK_SHIFT);
@@ -118,10 +118,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
             }
             return false;
-        }
         case MY_SCLN:
-            {
-            static bool my_scln_registered;
             if (record->event.pressed) {
                 if (mod_state & MOD_MASK_SHIFT) {
                     register_code16(LSFT(JP_SCLN));
@@ -138,17 +135,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
             }
             return false;
-        }
         default:
             return true;
     }
 };
-
-#ifdef OLED_DRIVER_ENABLE
-#    include "rev1.h"
-#    include "oled_driver.h"
-#endif
-
-#ifdef OLED_DRIVER_ENABLE
-void oled_task_user(void) { render_logo(); }
-#endif
