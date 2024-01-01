@@ -17,30 +17,59 @@ enum custom_keycodes {
 };
 
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case MO(_MOD1):
-            if (!record->event.pressed) {
-                clear_mods();
-            }
-            return true;
+// 良い感じに alt-tab する
+static bool is_window_switching = false;
+bool window_switch(uint16_t keycode, keyrecord_t *record) {
+    switch(keycode) {
         case ATAB:
             if (record->event.pressed) {
+                is_window_switching = true;
                 register_code(KC_LALT);
                 tap_code(KC_TAB);
             }
             return false;
         case ASTAB:
             if (record->event.pressed) {
+                is_window_switching = true;
                 register_code(KC_LALT);
                 register_code(KC_LSFT);
                 tap_code(KC_TAB);
                 unregister_code(KC_LSFT);
             }
             return false;
+        case KC_UP:
+        case KC_DOWN:
+        case KC_LEFT:
+        case KC_RIGHT:
+            return true;
+        case MO(_MOD1):
+            if (!record->event.pressed) {
+                unregister_code(KC_LALT);
+                is_window_switching = false;
+                return true;
+            }
+        default:
+            unregister_code(KC_LALT);
+            is_window_switching = false;
+            return false;
+    }
+}
+
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (is_window_switching) {
+        return window_switch(keycode, record);
+    }
+
+    switch (keycode) {
+        case ATAB:
+        case ASTAB:
+            return window_switch(keycode, record);
         default:
             return true;
     }
+
+    return true;
 };
 
 
