@@ -1,8 +1,50 @@
 #include QMK_KEYBOARD_H
 #include "keymap_japanese.h"
 
-#define _BASE 0
 
+// keyboard layouts
+enum layers {
+    _BASE = 0,
+    _MOD1,
+    _XXXX,
+};
+
+
+enum custom_keycodes {
+    MOD1 = SAFE_RANGE,
+    ATAB,
+    ASTAB,
+};
+
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case MO(_MOD1):
+            if (!record->event.pressed) {
+                clear_mods();
+            }
+            return true;
+        case ATAB:
+            if (record->event.pressed) {
+                register_code(KC_LALT);
+                tap_code(KC_TAB);
+            }
+            return false;
+        case ASTAB:
+            if (record->event.pressed) {
+                register_code(KC_LALT);
+                register_code(KC_LSFT);
+                tap_code(KC_TAB);
+                unregister_code(KC_LSFT);
+            }
+            return false;
+        default:
+            return true;
+    }
+};
+
+
+// clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_BASE] = LAYOUT( \
     KC_0, KC_ESC,  KC_F1, KC_F2,   KC_F3,   KC_F4,   KC_F5,  KC_0, XXXXXXX,    KC_0, KC_F6,  KC_F7, KC_F8,   KC_F9,  KC_F10,  KC_F11,  KC_F12,  KC_0, \
@@ -10,6 +52,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_0, KC_TAB,  KC_Q,  KC_W,    KC_E,    KC_R,    KC_T,   KC_0, XXXXXXX,    KC_0, KC_Y,   KC_U,  KC_I,    KC_O,   KC_P,    JP_AT,   JP_LBRC, KC_0, \
     KC_0, KC_LCTL, KC_A,  KC_S,    KC_D,    KC_F,    KC_G,   KC_0, XXXXXXX,    KC_0, KC_H,   KC_J,  KC_K,    KC_L,   JP_SCLN, JP_COLN, JP_RBRC, KC_0, \
     KC_0, KC_LSFT, KC_Z,  KC_X,    KC_C,    KC_V,    KC_B,   KC_0, XXXXXXX,    KC_0, KC_N,   KC_M,  JP_COMM, JP_DOT, JP_SLSH, JP_BSLS, KC_0,    KC_0, \
-    KC_0, KC_0,    KC_0,  KC_LWIN, KC_LALT, KC_BSPC, KC_SPC, KC_0, XXXXXXX,    KC_0, KC_SPC, KC_0,  JP_ZKHK, KC_0,   KC_0,    KC_0,    KC_0,    KC_0  \
-)
+    KC_0, KC_0,    KC_0,  KC_LWIN, KC_LALT, KC_BSPC, KC_SPC, KC_0, XXXXXXX,    KC_0, KC_SPC, MO(_MOD1), JP_ZKHK, KC_0,   KC_0,    KC_0,    KC_0,    KC_0  \
+),
+
+[_MOD1] = LAYOUT( \
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, KC_HOME, KC_UP,   KC_END,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+    XXXXXXX, _______, XXXXXXX, ASTAB  , XXXXXXX, ATAB,    XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, KC_LEFT, KC_DOWN, KC_RIGHT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+    XXXXXXX, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_DEL,  XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX  \
+),
+
+
+// blank layout
+[_XXXX] = LAYOUT( \
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX  \
+),
 };
