@@ -12,11 +12,10 @@ enum layers {
 
 // Custom Keycords
 enum custom_keycodes {
-    MOD1 = SAFE_RANGE,
-    ATAB,
+    ATAB = SAFE_RANGE,
     ASTAB,
-    MOD2,  // semicolon, shift: colon
-    MOD3,  // asterisk, shift: plus
+    CK1,  // semicolon, shift: colon
+    CK2,  // asterisk, shift: plus
 };
 
 // Key combination short hand.
@@ -74,7 +73,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case ATAB:
         case ASTAB:
             return window_switch(keycode, record);
-        case MOD2:
+        case CK1:
             if (mod_state & MOD_MASK_SHIFT) {
                 // シフト押しながらだとコロン(JP_COLN)
                 del_mods(MOD_MASK_SHIFT);
@@ -93,7 +92,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
             }
             return false;
-        case MOD3:
+        case CK2:
             if (mod_state & MOD_MASK_SHIFT) {
                 // シフト押しながらだと + (S(JP_SCLN))
                 if (record->event.pressed) {
@@ -123,19 +122,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_BASE] = LAYOUT( \
-    KC_ESC,  KC_F1, KC_F2,   KC_F3,   KC_F4,   KC_F5,  KC_0, KC_0, XXXXXXX,    KC_0, KC_F6,  KC_F7,     KC_F8,   KC_F9,  KC_F10,  KC_F11,  KC_F12,  KC_BSPC, \
-    KC_ESC,  KC_1,  KC_2,    KC_3,    KC_4,    KC_5,   KC_0, KC_0, XXXXXXX,    KC_0, KC_6,   KC_7,      KC_8,    KC_9,   KC_0,    JP_MINS, JP_CIRC, JP_YEN, \
-    KC_TAB,  KC_Q,  KC_W,    KC_E,    KC_R,    KC_T,   KC_0, KC_0, XXXXXXX,    KC_0, KC_Y,   KC_U,      KC_I,    KC_O,   KC_P,    JP_AT,   JP_LBRC, KC_0, \
-    KC_LCTL, KC_A,  KC_S,    KC_D,    KC_F,    KC_G,   KC_0, KC_0, XXXXXXX,    KC_0, KC_H,   KC_J,      KC_K,    KC_L,   KC_ENT,  MOD2,    JP_RBRC, KC_ESC, \
-    KC_LSFT, KC_Z,  KC_X,    KC_C,    KC_V,    KC_B,   KC_0, KC_0, XXXXXXX,    KC_0, KC_N,   KC_M,      JP_COMM, JP_DOT, JP_SLSH, JP_BSLS, KC_0,    KC_0, \
-    KC_0,    KC_0,  KC_LWIN, KC_LALT, KC_BSPC, KC_SPC, KC_0, KC_0, XXXXXXX,    KC_0, KC_SPC, MO(_MOD1), JP_ZKHK, KC_0,   KC_0,    KC_0,    KC_0,    KC_0  \
+    KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,  KC_0,    KC_0,    XXXXXXX,    KC_0, KC_F6,  KC_F7,     KC_F8,   KC_F9,  KC_F10,  KC_F11,  KC_F12,  KC_BSPC, \
+    KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,   KC_0,    KC_0,    XXXXXXX,    KC_0, KC_6,   KC_7,      KC_8,    KC_9,   KC_0,    JP_MINS, JP_CIRC, JP_YEN, \
+    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,   KC_0,    KC_0,    XXXXXXX,    KC_0, KC_Y,   KC_U,      KC_I,    KC_O,   KC_P,    JP_AT,   JP_LBRC, KC_0, \
+    KC_LCTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,   KC_WBAK, KC_WFWD, XXXXXXX,    KC_0, KC_H,   KC_J,      KC_K,    KC_L,   KC_ENT,  CK1,    JP_RBRC, KC_ESC, \
+    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,   KC_0,    KC_0,    XXXXXXX,    KC_0, KC_N,   KC_M,      JP_COMM, JP_DOT, JP_SLSH, JP_BSLS, KC_0,    KC_0, \
+    KC_DEL,  KC_LWIN, XXXXXXX, KC_LALT, KC_BSPC, KC_SPC, KC_0,    KC_ESC,  XXXXXXX,    KC_0, KC_SPC, MO(_MOD1), JP_ZKHK, KC_0,   KC_0,    KC_0,    KC_0,    KC_0  \
 ),
 
 [_MOD1] = LAYOUT( \
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
     XXXXXXX, ALTF4,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, KC_HOME, KC_UP,   KC_END,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-    _______, XXXXXXX, ASTAB  , XXXXXXX, ATAB,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, KC_LEFT, KC_DOWN, KC_RIGHT, MOD3,    XXXXXXX, XXXXXXX, XXXXXXX, \
+    _______, XXXXXXX, ASTAB  , XXXXXXX, ATAB,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, KC_LEFT, KC_DOWN, KC_RIGHT, CK2,    XXXXXXX, XXXXXXX, XXXXXXX, \
     _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
     XXXXXXX, XXXXXXX, XXXXXXX, _______, KC_DEL,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, _______, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX  \
 ),
