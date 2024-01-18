@@ -26,6 +26,11 @@ enum custom_keycodes {
 #define S_INS LSFT(KC_INS)
 #define C_INS LCTL(KC_INS)
 
+struct ck1_key_state {
+    bool normal;
+    bool shift;
+};
+static struct ck1_key_state ck1_state;
 
 // 良い感じに alt-tab する
 static bool is_window_switching = false;
@@ -79,21 +84,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case ASTAB:
             return window_switch(keycode, record);
         case CK1:
-            if (mod_state & MOD_MASK_SHIFT) {
-                // シフト押しながらだとコロン(JP_COLN)
-                del_mods(MOD_MASK_SHIFT);
-                if (record->event.pressed) {
-                   register_code(JP_COLN);
+            if (record->event.pressed) {
+                if (mod_state & MOD_MASK_SHIFT) {
+                    // シフト押しながらだとコロン(JP_COLN)
+                    del_mods(MOD_MASK_SHIFT);
+                    register_code(JP_COLN);
+                    set_mods(mod_state);
+                    ck1_state.shift = true;
                 } else {
-                   unregister_code(JP_COLN);
+                    // 普通に押すとセミコロン(JP_SCLN)
+                    register_code(JP_SCLN);
+                    ck1_state.normal = true;
                 }
-                set_mods(mod_state);
             } else {
-                // 普通に押すとセミコロン(JP_SCLN)
-                if (record->event.pressed) {
-                   register_code(JP_SCLN);
-                } else {
-                   unregister_code(JP_SCLN);
+                if (ck1_state.normal) {
+                    unregister_code(JP_SCLN);
+                    ck1_state.normal = false;
+                }
+                if (ck1_state.shift) {
+                    unregister_code(JP_COLN);
+                    ck1_state.shift = false;
                 }
             }
             return false;
