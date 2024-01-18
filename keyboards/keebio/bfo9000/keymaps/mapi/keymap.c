@@ -71,7 +71,7 @@ bool window_switch(uint16_t keycode, keyrecord_t *record) {
 }
 
 
-uint8_t mod_state;
+static uint8_t mod_state;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     mod_state = get_mods();
 
